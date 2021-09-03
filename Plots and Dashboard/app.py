@@ -52,29 +52,67 @@
 # if __name__ == '__main__':
 #     app.run_server(debug=True)
 
+# import dash
+# import dash_core_components as dcc
+# import dash_html_components as html
+# import plotly.express as px
+# import pandas as pd
+
+
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+# df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv')
+
+# fig = px.scatter(df, x="gdp per capita", y="life expectancy",
+#                  size="population", color="continent", hover_name="country",
+#                  log_x=True, size_max=60)
+
+# app.layout = html.Div([
+#     dcc.Graph(
+#         id='life-exp-vs-gdp',
+#         figure=fig
+#     )
+# ])
+
+# if __name__ == '__main__':
+#     app.run_server(debug=True)
+
 import dash
-import dash_core_components as dcc
+import time
+from datetime import datetime
+from dash.dependencies import Input, Output
 import dash_html_components as html
-import plotly.express as px
-import pandas as pd
+from dash_html_components.Button import Button
 
+app = dash.Dash()
+app.layout = html.Div(
+    [
+        html.Button("execute callback", id="button_1"),
+        html.Button("execute slow callback", id="button_2"),
+        html.Div(children="callback not executed", id="first-output"),
+        html.Div(children="callback not executed", id="second-output"),
+    ]
+)
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+@app.callback(
+    Output("first-output", "children"),
+    Input("button_1", "n_clicks"))
+def first_callback(n):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    return "in the fast callback it is : " + current_time 
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv')
-
-fig = px.scatter(df, x="gdp per capita", y="life expectancy",
-                 size="population", color="continent", hover_name="country",
-                 log_x=True, size_max=60)
-
-app.layout = html.Div([
-    dcc.Graph(
-        id='life-exp-vs-gdp',
-        figure=fig
-    )
-])
+@app.callback(
+    Output("Second-output","children"),
+    Input("button_2", "n_clicks")
+)
+def second_callback(n):
+    time.sleep(5)
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    return "in the slow callback it is : " + current_time 
 
 if __name__ == '__main__':
     app.run_server(debug=True)
