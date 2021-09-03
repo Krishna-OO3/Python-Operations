@@ -78,6 +78,7 @@ TABLES['titles'] = (
     "     REFERENCES `employees` (`emp_no`) ON DELETE CASCADE"
     ") ENGINE=InnoDB")
 
+
 def create_database(cursor):
     try:
         cursor.execute(
