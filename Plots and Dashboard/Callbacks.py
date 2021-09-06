@@ -1,3 +1,5 @@
+# First dash program 
+
 # import dash
 # import dash_core_components as dcc
 # import dash_html_components as html
@@ -51,6 +53,9 @@
 # if __name__ == '__main__':
 #     app.run_server(debug=True)
 
+
+# dash graphs using plotly
+
 # import dash
 # import dash_core_components as dcc
 # import dash_html_components as html
@@ -76,6 +81,9 @@
 
 # if __name__ == '__main__':
 #     app.run_server(debug=True)
+
+
+# Showing the callback time using dcc
 
 # import dash
 # import time
@@ -115,6 +123,8 @@
 # if __name__ == '__main__':
 #     app.run_server(debug=True)
 
+
+# clickable button callbacks
 
 # import dash
 # from dash.dependencies import Input, Output
@@ -162,6 +172,8 @@
 #     app.run_server(debug=True)
 
 
+# Slider using dash
+
 # import dash
 # from dash.dependencies import Input, Output
 # import dash_core_components as dcc
@@ -201,30 +213,77 @@
 #     app.run_server(debug=True)
 
 
+# Changing output when input is given using dash
+
+# import dash
+# from dash.dependencies import Input , Output
+# import dash_core_components as dcc
+# import dash_html_components as html
+
+# app = dash.Dash(__name__)
+
+# app.layout = html.Div(
+#     [html.H4("Changing the value in the output as in the input"),
+#     html.Div(
+#         [
+#         "Input: ",
+#         dcc.Input(id='my-input', value='initial value', type='text')
+#         ]
+#     ),
+#     html.Br(),
+#     html.Div(id='my-output'),
+#     ]
+# )
+
+# @app.callback(
+#     Output(component_id="my-output",component_property="children"),
+#     Input(component_id="my-input", component_property="value")
+# )
+# def update_output(input_value):
+#     return 'Output:{}'.format(input_value)
+
+# if __name__ == '__main__':
+#     app.run_server(debug=True)
+
+
+# Squares using dash
 
 import dash
-from dash.dependencies import Input , Output
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 
-app = dash.Dash(__name__)
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
-    [html.H6("Changing the value in the output as in the input"),
-    html.Div([
-        "Input: ",
-        dcc.Input(id='my-input', value='initial value', type='text')
+    [dcc.Input(
+        id='num-multi',
+        type='number',
+        value=9
+    ),
+    html.Table([
+        html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='square')]),
+        html.Tr([html.Td(['x', html.Sup(3)]), html.Td(id='cube')]),
+        html.Tr([html.Td([2, html.Sup('x')]), html.Td(id='twos')]),
+        html.Tr([html.Td([3, html.Sup('x')]), html.Td(id='threes')]),
+        html.Tr([html.Td(['x', html.Sup('x')]), html.Td(id='x^x')]),
     ]),
-    html.Br(),
-    html.Div(id='my-output'),
-])
+    ]
+)
 
 @app.callback(
-    Output(component_id="my-output",component_property="Children"),
-    Input(component_id="my-input", component_property="value")
+    Output('square', 'children'),
+    Output('cube', 'children'),
+    Output('twos', 'children'),
+    Output('threes', 'children'),
+    Output('x^x', 'children'),
+    Input('num-multi', 'value')
 )
-def update_output(input_value):
-    return 'Output:{}'.format(input_value)
+
+def callback_a(x):
+    return x**2, x**3, 2**x, 3**x, x**x
 
 if __name__ == '__main__':
     app.run_server(debug=True)
