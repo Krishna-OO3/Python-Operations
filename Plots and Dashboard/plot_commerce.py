@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("2021-08-17commerce_event-443804504849141782.csv")
+df = pd.read_csv("commerce.csv")
 
 # 1-To view Single countries purchase data (user_data_geo_country_code){You can give any countries values to seperately view that countries datas}
 # 2-Must not include unpaid customers
