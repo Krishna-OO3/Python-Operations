@@ -1,0 +1,20 @@
+Dash components:
+-> pip install Dash
+-> pip install Dash-core-components
+-> pip install Dash-html-components
+-> pip install Dash-bootstrap-components
+-> pip install Chart-studio
+{If you are using jupyter notebook}
+-> pip install jupyter-Dash
+Plotting and calculations:
+-> pip install pandas
+-> pip install numpy
+-> pip install plotly
+{If you are using jupyter notebook}
+-> pip install notebook
+
+
+Instructions:
+
+=> Setup a virtual environment and name it anything you want.
+=> install all the modules into the environment.
