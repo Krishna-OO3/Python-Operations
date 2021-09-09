@@ -24,9 +24,9 @@ app.layout = html.Div([
                 mode = 'markers'
             )],
             'layout': go.Layout(
-                title = 'mpg.csv dataset',
-                xaxis = {'title': 'model year'},
-                yaxis = {'title': 'miles per gallon'},
+                title = 'mpg.csv Data',
+                xaxis = {'title': 'Model year'},
+                yaxis = {'title': 'Miles per gallon'},
                 hovermode='closest'
             )
         }

@@ -25,7 +25,7 @@ app.layout = html.Div([
                         'size': 12,
                         'color': 'rgb(51,204,153)',
                         'line': {'width': 2}
-                        }
+                    }
                 )
             ],
             'layout': go.Layout(
@@ -37,7 +37,7 @@ app.layout = html.Div([
         }
    )], style={'width':'30%', 'display':'inline-block'}),
 
-    html.Div([
+html.Div([
     html.Pre(id='selection', style={'paddingTop':25})
     ], style={'width':'30%', 'display':'inline-block', 'verticalAlign':'top'})
 ])
